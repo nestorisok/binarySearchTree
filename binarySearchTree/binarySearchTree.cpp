@@ -33,27 +33,29 @@ public:
 int main() {
 
 	BST myTree;
-	Node myNode = 6;
-	myTree.insertNode(&myNode, 8);
+	Node myNode = 4;
+	myTree.insertNode(&myNode, 2);
+	myTree.insertNode(&myNode, 7);
+	myTree.insertNode(&myNode, 1);
+	myTree.insertNode(&myNode, 3);
 	myTree.printTree(&myNode);
 	
-
+	cout << "\nLargest: " << myTree.Largest(&myNode) << endl;
 
 	return 0;
 }
 
 
 
-void BST::printTree(Node* root) { // post order travel
+void BST::printTree(Node* root) { // post order travel // Currently works
 	if (root != NULL) {
 
 		printTree(root->leftChild);
 		printTree(root->rightChild);
 		cout << " " << root->data;
-		getRoot();
+		//getRoot();
 	}
 
-	return;
 }
 
 int BST::Largest(Node* root) {
@@ -73,15 +75,15 @@ BST::BST() {
 	return;
 }
 
-Node* BST::insertNode(Node* root, int data) {
+Node* BST::insertNode(Node* root, int data) { 
 
 	if (root == NULL) {
-		Node::Node(data);
-
-		return getRoot();
+		Node* root = new Node(data); // this WORKS
+		return root;
 	}
+	
 
-	else if (data < root->data) {
+	if (data < root->data) {
 
 		root->leftChild = insertNode(root->leftChild, data);
 	}
@@ -89,6 +91,7 @@ Node* BST::insertNode(Node* root, int data) {
 
 		root->rightChild = insertNode(root->rightChild, data);
 	}
+
 
 	return root;
 }
