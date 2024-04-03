@@ -42,6 +42,16 @@ int main() {
 	
 	cout << "\nLargest: " << myTree.Largest(&myNode) << endl;
 
+	int searchNum = 5;
+
+	if (myTree.findNode(&myNode, searchNum) == NULL) {
+		cout << searchNum << " was not found." << endl;
+	}
+	else {
+		cout << searchNum << " was found." << endl;
+	}
+
+
 	return 0;
 }
 
@@ -67,6 +77,22 @@ int BST::Largest(Node* root) {
 
 	return root->data;
 }
+
+bool BST::findNode(Node* root, int data) {
+
+	if (root == NULL || root->data == data) {
+		return root;
+	}
+
+	if (root->data < data) {
+		return findNode(root->rightChild, data);
+	}
+
+	else if (root->data > data) {
+		return findNode(root->leftChild, data);
+	}
+}
+
 
 
 BST::BST() {
